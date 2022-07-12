@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Optional tailing slash with Django</title>
+    <link href="/post/optional-tailing-slash-with-django/"/>
+    <url>/post/optional-tailing-slash-with-django/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Fanciful-Moment"><a href="#Fanciful-Moment" class="headerlink" title="Fanciful Moment"></a>Fanciful Moment</h2><p>The default urls of Django must include a tailing slash, otherwise, the framework will not recognize the url. But according to the user’s preference, the tailing slash will not be given most of the time. Here is the solution to change this rule. We can use the regex to match the tailing slash whatever it exists or not.</p><h2 id="With-rest-framework-router"><a href="#With-rest-framework-router" class="headerlink" title="With rest_framework router"></a>With rest_framework router</h2><figure class="highlight python"><figcaption><span>optional tailing slash with router</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> viewsets<br><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> SimpleRouter<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OptionalSimpleRouter</span>(<span class="hljs-params">SimpleRouter</span>):</span><br>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>)</span><br><span class="hljs-function">    <span class="hljs-title">super</span>().<span class="hljs-title">__init__</span>()</span><br>    self.tailing_slash = &#x27;/?&#x27;<br>   <br>router = OptionalSimpleRouter()<br>router.register(<span class="hljs-string">r&#x27;test&#x27;</span>, viewsets.TestViewSet, basename=<span class="hljs-string">&#x27;test&#x27;</span>)<br><br></code></pre></td></tr></table></figure><h2 id="With-django-path"><a href="#With-django-path" class="headerlink" title="With django path"></a>With django path</h2><figure class="highlight python"><figcaption><span>optional tailing slash with re_path</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> views<br><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> re_path<br><br>re_path(<span class="hljs-string">r&#x27;test/?$&#x27;</span>, views.TestView, basename=<span class="hljs-string">&#x27;test&#x27;</span>)<br><br></code></pre></td></tr></table></figure><p>Refrences:</p><p>[1] <a href="https://stackoverflow.com/questions/59115733/how-to-make-trailing-slash-optional-in-django">https://stackoverflow.com/questions/59115733/how-to-make-trailing-slash-optional-in-django</a></p><p>[2] <a href="https://stackoverflow.com/questions/46163838/how-can-i-make-a-trailing-slash-optional-on-a-django-rest-framework-simplerouter">https://stackoverflow.com/questions/46163838/how-can-i-make-a-trailing-slash-optional-on-a-django-rest-framework-simplerouter</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>django</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>django</tag>
+      
+      <tag>url-tailing-slash</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>React键盘事件监听</title>
     <link href="/post/keyboard-event-listener-js/"/>
     <url>/post/keyboard-event-listener-js/</url>
@@ -76,7 +105,9 @@
     
     <tags>
       
-      <tag>算法, 斜率法</tag>
+      <tag>算法</tag>
+      
+      <tag>斜率法</tag>
       
     </tags>
     
@@ -101,7 +132,9 @@
     
     <tags>
       
-      <tag>算法, 多重背包</tag>
+      <tag>算法</tag>
+      
+      <tag>多重背包</tag>
       
     </tags>
     
@@ -234,9 +267,9 @@
       
       <tag>python</tag>
       
-      <tag>celery</tag>
-      
       <tag>django</tag>
+      
+      <tag>celery</tag>
       
     </tags>
     
@@ -418,14 +451,14 @@
     
     <categories>
       
-      <category>Django</category>
+      <category>django</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Django</tag>
+      <tag>django</tag>
       
       <tag>lock</tag>
       
@@ -454,7 +487,7 @@
       
       <tag>exception handler</tag>
       
-      <tag>Django</tag>
+      <tag>django</tag>
       
     </tags>
     

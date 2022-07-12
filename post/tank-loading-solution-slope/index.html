@@ -995,7 +995,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95-%E6%96%9C%E7%8E%87%E6%B3%95/">算法, 斜率法</a>
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%9C%E7%8E%87%E6%B3%95/">斜率法</a>
                     
                   </div>
                 
@@ -1028,6 +1030,32 @@
                 </div>
               
             </div>
+
+            <!-- donate block -->
+            
+              <article class="donate" id="donate">
+                <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+           ↑<br>
+           您的支持是我最大的动力！
+        </span>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <img src="/images/alipay.jpeg" srcset="/img/loading.gif" alt="alipay" title="alipay"/>
+        <img src="/images/wechatpay.jpeg" srcset="/img/loading.gif" alt="wechatpay" title="wechatpay"/>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+              </article>
+            
 
             
               <!-- Comments -->
@@ -1062,6 +1090,7 @@
 
               </article>
             
+
           </article>
         </div>
       </div>
