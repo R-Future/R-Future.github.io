@@ -178,6 +178,123 @@
   <div class="row mx-auto index-card">
     
     
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/post/huge-memory-usage-with-numpy-dot/" target="_self">
+          <img src="/images/huge-memory-usage-with-numpy-dot/numpy-logo.png" srcset="/img/loading.gif" alt="numpy.dot的内存使用问题">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/huge-memory-usage-with-numpy-dot/">numpy.dot的内存使用问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/huge-memory-usage-with-numpy-dot/">
+          
+          
+            
+          
+          问题描述这又是一个线上问题（不得不说要做出一个稳定能用的产品已然不易）。起初的现象是线上偶尔会报警（显然有bug出现了嘛）: Worker exited prematurely: signal 9 (SIGKILL)。这是个什么玩意儿？之前没见过啊！在google上一顿操作，大概有了些眉目。 大部分解释都指向了linux OOM(Out Of Memory)机制。 那…我遇到的会是这个问题吗？带着
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-17 16:34" pubdate>
+              2020-12-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+              <a href="/tags/numpy/">numpy</a>
+            
+              <a href="/tags/memory/">memory</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/post/debug-celery-task-online/" target="_self">
+          <img src="/images/debug-celery-task-online/celery.jpg" srcset="/img/loading.gif" alt="记录一次线上celery task的耗时分析">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/debug-celery-task-online/">记录一次线上celery task的耗时分析</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/debug-celery-task-online/">
+          
+          
+            
+          
+          这是一次线上报出来的诡异事件（至少起初是这么认为的）。对于同一个celery task, 开发环境上毫秒级的操作转移到AWS上后需要花费6秒左右。因此，呈现在UI上的表现会让用户极度抓狂。于是乎，性能优化被提到最高优先级。
+第一阶段首先梳理下整个请求过程，即从发起请求到获得响应的各个阶段。整个过程包括大致包含三个阶段（如Figure 1所示）：1，django server获得请求，2，celer
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-15 13:18" pubdate>
+              2020-12-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+              <a href="/tags/django/">django</a>
+            
+              <a href="/tags/celery/">celery</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
@@ -604,108 +721,6 @@ const修饰符
               <a href="/tags/exception-handler/">exception handler</a>
             
               <a href="/tags/django/">django</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/intall-tensorflow-gpu-in-docker/">install tensorflow-gpu in docker on RHEL7</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/intall-tensorflow-gpu-in-docker/">
-          
-          
-            
-          
-          0. make sure that you have installed cudaCheck environment
-Verify you have a CUDA-capable GPU, run the command below and you will see the graphic info1lspci | grep -i nvidia
-Verify you have a supporte
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-07-15 10:41" pubdate>
-              2019-07-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/docker/">docker</a>
-            
-              <a href="/tags/tensorflow-gpu/">tensorflow-gpu</a>
-            
-              <a href="/tags/cuda/">cuda</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/pat-basic-1003/">PAT Basic 1003</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/pat-basic-1003/">
-          
-          
-            
-          
-          1. 解题分析初看题目时本以为看懂了，再看输入输出样例发现一头雾水。回到题干分析判定条件，才明白什么样的输入是符合要求的。然后你会发现这其实就是一个找规律的问题。那么，如何判定“答案正确”呢？分析如下, 表1.1中每一行显示了从已知正确字符串(根据条件1和2)推导出其它正确字符串(根据条件3)的过程。通过观察字符串a、b、c，我们可以发现一个规律len(c)=len(a)*len(b)。到此，问题
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-07-03 23:42" pubdate>
-              2019-07-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PAT/">PAT</a>
             
           </div>
         

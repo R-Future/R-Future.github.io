@@ -4,6 +4,66 @@
   
   
   <entry>
+    <title>Django object-based permisson</title>
+    <link href="/post/object-level-permission-not-working/"/>
+    <url>/post/object-level-permission-not-working/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Fanciful-moment"><a href="#Fanciful-moment" class="headerlink" title="Fanciful moment"></a>Fanciful moment</h2><p>According to the real needs, django model-based permission is not enough. So we need to focus on the object level. How could we do? Here is the solution.</p><h2 id="Object-based-permission"><a href="#Object-based-permission" class="headerlink" title="Object-based permission"></a>Object-based permission</h2><p>The django framework will check model-based permissions firstly, then check the object-based permissions. So if we want to add an object-based permission successfully, we should add user a model-based permission or a permission group which includes this model-based permission. Here is the sample code.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">change_perm = Permission.objects.get(codename=<span class="hljs-string">f&#x27;change_<span class="hljs-subst">&#123;model_name&#125;</span>&#x27;</span>)<br>delete_perm = Permission.objects.get(codename=<span class="hljs-string">f&#x27;delete_<span class="hljs-subst">&#123;model_name&#125;</span>&#x27;</span>)<br><span class="hljs-comment"># get or create a group which includes the model-level permissions</span><br>group, created = Group.objects.get_or_create(name=<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;group_name&#125;</span>&#x27;</span>)<br><span class="hljs-keyword">if</span> created:<br>    group.permissions.<span class="hljs-built_in">set</span>([change_perm, delete_perm])<br>    <span class="hljs-comment"># or </span><br>    <span class="hljs-comment"># group.permissions.add(change_perm)</span><br>    <span class="hljs-comment"># group.permissions.add(delete_perm)</span><br>user.groups.add(group)<br><span class="hljs-comment"># assign object permissions</span><br>assign_perm(change_perm, user, instance)<br>assign_perm(delete_perm, user, instance)  <br></code></pre></td></tr></table></figure><p>References:</p><p>[1] <a href="https://stackoverflow.com/questions/54503855/permissions-not-working-using-django-guardian-for-djangorestframework">https://stackoverflow.com/questions/54503855/permissions-not-working-using-django-guardian-for-djangorestframework</a></p><p>[2] <a href="https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544">https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>django</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>permission</tag>
+      
+      <tag>django</tag>
+      
+      <tag>django-guardian</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Different permissions for different actions with django-rest-framework</title>
+    <link href="/post/custom-permission-for-different-action-in-an-viewset/"/>
+    <url>/post/custom-permission-for-different-action-in-an-viewset/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Fanciful-moment"><a href="#Fanciful-moment" class="headerlink" title="Fanciful moment"></a>Fanciful moment</h2><p>The property <em>permission_classes</em> of an viewset controls the permission of all actions, which means all actions have same permissions. Sometimes we want to give a different permission to an action of the viewset from another one. Here is the solution for this.</p><h2 id="Custom-permission"><a href="#Custom-permission" class="headerlink" title="Custom permission"></a>Custom permission</h2><p>There is a function named <em>get_permissions()</em> in viewset class. If we want to give a different permission for an action, we can override this function. Here is the sample code:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> viewsets<br><span class="hljs-keyword">from</span> ...<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestViewSet</span>(<span class="hljs-params">viewsets.ModelViewSet</span>):</span><br>  model = Test<br>  serializer_class = TestSerializer<br>  permission_classes = [IsAuthenticated]  <br><br>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_permissions</span>(<span class="hljs-params">self</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Only admin can delete the instance</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># action is the function name</span><br>    <span class="hljs-keyword">if</span> self.action == <span class="hljs-string">&#x27;destory&#x27;</span>:<br>      self.permission_classes = [IsAdminUser]<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().get_permissions()<br><br>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">destory</span>(<span class="hljs-params">self</span>):</span><br>  <span class="hljs-comment"># do something</span><br></code></pre></td></tr></table></figure><p>References:<br>[1] <a href="https://www.django-rest-framework.org/api-guide/viewsets/#introspecting-viewset-actions">https://www.django-rest-framework.org/api-guide/viewsets/#introspecting-viewset-actions</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>django</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>django-rest-framework</tag>
+      
+      <tag>permission</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Optional tailing slash with Django</title>
     <link href="/post/optional-tailing-slash-with-django/"/>
     <url>/post/optional-tailing-slash-with-django/</url>

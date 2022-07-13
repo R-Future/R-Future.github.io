@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Future">
   <meta name="keywords" content="">
-  <title>Optional tailing slash with Django - Future</title>
+  <title>Django object-based permisson - Future</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -157,12 +157,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/images/django2048x1152.jpg') no-repeat center center;
+         style="background: url('/images/guardian.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Optional tailing slash with Django">
+            <span class="h2" id="subtitle" title="Django object-based permisson">
               
             </span>
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-07-12 11:40" pubdate>
-        2022年7月12日 中午
+      <time datetime="2022-07-12 21:25" pubdate>
+        2022年7月12日 晚上
       </time>
     </span>
   
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      153 字
+      184 字
     </span>
   
 
@@ -229,15 +229,15 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Optional tailing slash with Django</h1>
+            <h1 style="display: none">Django object-based permisson</h1>
             
             <div class="markdown-body">
-              <h2 id="Fanciful-Moment"><a href="#Fanciful-Moment" class="headerlink" title="Fanciful Moment"></a>Fanciful Moment</h2><p>The default urls of Django must include a tailing slash, otherwise, the framework will not recognize the url. But according to the user’s preference, the tailing slash will not be given most of the time. Here is the solution to change this rule. We can use the regex to match the tailing slash whatever it exists or not.</p>
-<h2 id="With-rest-framework-router"><a href="#With-rest-framework-router" class="headerlink" title="With rest_framework router"></a>With rest_framework router</h2><figure class="highlight python"><figcaption><span>optional tailing slash with router</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> viewsets<br><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> SimpleRouter<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OptionalSimpleRouter</span>(<span class="hljs-params">SimpleRouter</span>):</span><br>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>)</span><br><span class="hljs-function">    <span class="hljs-title">super</span>().<span class="hljs-title">__init__</span>()</span><br>    self.tailing_slash = &#x27;/?&#x27;<br>   <br>router = OptionalSimpleRouter()<br>router.register(<span class="hljs-string">r&#x27;test&#x27;</span>, viewsets.TestViewSet, basename=<span class="hljs-string">&#x27;test&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
-<h2 id="With-django-path"><a href="#With-django-path" class="headerlink" title="With django path"></a>With django path</h2><figure class="highlight python"><figcaption><span>optional tailing slash with re_path</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> views<br><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> re_path<br><br>re_path(<span class="hljs-string">r&#x27;test/?$&#x27;</span>, views.TestView, basename=<span class="hljs-string">&#x27;test&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
-<p>Refrences:</p>
-<p>[1] <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/59115733/how-to-make-trailing-slash-optional-in-django">https://stackoverflow.com/questions/59115733/how-to-make-trailing-slash-optional-in-django</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/46163838/how-can-i-make-a-trailing-slash-optional-on-a-django-rest-framework-simplerouter">https://stackoverflow.com/questions/46163838/how-can-i-make-a-trailing-slash-optional-on-a-django-rest-framework-simplerouter</a></p>
+              <h2 id="Fanciful-moment"><a href="#Fanciful-moment" class="headerlink" title="Fanciful moment"></a>Fanciful moment</h2><p>According to the real needs, django model-based permission is not enough. So we need to focus on the object level. How could we do? Here is the solution.</p>
+<h2 id="Object-based-permission"><a href="#Object-based-permission" class="headerlink" title="Object-based permission"></a>Object-based permission</h2><p>The django framework will check model-based permissions firstly, then check the object-based permissions. So if we want to add an object-based permission successfully, we should add user a model-based permission or a permission group which includes this model-based permission. Here is the sample code.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">change_perm = Permission.objects.get(codename=<span class="hljs-string">f&#x27;change_<span class="hljs-subst">&#123;model_name&#125;</span>&#x27;</span>)<br>delete_perm = Permission.objects.get(codename=<span class="hljs-string">f&#x27;delete_<span class="hljs-subst">&#123;model_name&#125;</span>&#x27;</span>)<br><span class="hljs-comment"># get or create a group which includes the model-level permissions</span><br>group, created = Group.objects.get_or_create(name=<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;group_name&#125;</span>&#x27;</span>)<br><span class="hljs-keyword">if</span> created:<br>    group.permissions.<span class="hljs-built_in">set</span>([change_perm, delete_perm])<br>    <span class="hljs-comment"># or </span><br>    <span class="hljs-comment"># group.permissions.add(change_perm)</span><br>    <span class="hljs-comment"># group.permissions.add(delete_perm)</span><br>user.groups.add(group)<br><span class="hljs-comment"># assign object permissions</span><br>assign_perm(change_perm, user, instance)<br>assign_perm(delete_perm, user, instance)  <br></code></pre></td></tr></table></figure>
+<p>References:</p>
+<p>[1] <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/54503855/permissions-not-working-using-django-guardian-for-djangorestframework">https://stackoverflow.com/questions/54503855/permissions-not-working-using-django-guardian-for-djangorestframework</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544">https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544</a></p>
 
             </div>
             <hr>
@@ -257,9 +257,11 @@
                     
                       <a class="hover-with-bg" href="/tags/python/">python</a>
                     
+                      <a class="hover-with-bg" href="/tags/permission/">permission</a>
+                    
                       <a class="hover-with-bg" href="/tags/django/">django</a>
                     
-                      <a class="hover-with-bg" href="/tags/url-tailing-slash/">url-tailing-slash</a>
+                      <a class="hover-with-bg" href="/tags/django-guardian/">django-guardian</a>
                     
                   </div>
                 
@@ -272,18 +274,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/custom-permission-for-different-action-in-an-viewset/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Different permissions for different actions with django-rest-framework</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/keyboard-event-listener-js/">
-                        <span class="hidden-mobile">React键盘事件监听</span>
+                      <a href="/post/custom-permission-for-different-action-in-an-viewset/">
+                        <span class="hidden-mobile">Different permissions for different actions with django-rest-framework</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
