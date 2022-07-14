@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>AMAZON HTTPS设定</title>
+    <link href="/post/amazon-https-config/"/>
+    <url>/post/amazon-https-config/</url>
+    
+    <content type="html"><![CDATA[<p>网络安全一直是一个备受关注的问题。如今，站点部署基本都要考虑使用http协议的安全版本https。市面上已经有很多免费的证书生成工具，比如<a href="https://en.wikipedia.org/wiki/Let%27s_Encrypt">letsencrypt</a>，配合nginx可以很容易完成部署。当然，类似亚马逊这样的云服务商也都提供了相关功能以方面用户使用。<br><img src="/images/amazon-https-config/config-process.png" alt="图1.1, amazon ec2 https配置流程"></p><h2 id="Load-balancer"><a href="#Load-balancer" class="headerlink" title="Load balancer"></a>Load balancer</h2><p>添加load balancer的时候，选择application即可。classic版本貌似没法将http重定向到https。图1.2为监听器配置，dbook-lb-tg为target group。<br><img src="/images/amazon-https-config/load-balancer.png" alt="图1.2, load balancer监听器"></p><h2 id="Route53"><a href="#Route53" class="headerlink" title="Route53"></a>Route53</h2><p>创建route53后即可得到域名解析服务器（如图1.3），将其配置到域名购买方即可。<br><img src="/images/amazon-https-config/route53.png" alt="图1.3, route 53 DNS"></p><h2 id="Notice"><a href="#Notice" class="headerlink" title="Notice"></a>Notice</h2><p>申请证书的时候有个坑，子域名*.example.com的证书是不包含根域名example.com的，所以需要另外对根域名申请一个证书。<br><img src="/images/amazon-https-config/cert-apply-note.png" alt="图1.4, 区别域名的证书申请"></p><p>References:<br>[1] <a href="https://docs.aws.amazon.com/zh_cn/acm/latest/userguide/acm-certificate.html">https://docs.aws.amazon.com/zh_cn/acm/latest/userguide/acm-certificate.html</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>amazon</tag>
+      
+      <tag>https</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>矩阵分解 -- LU</title>
     <link href="/post/matrix-lu-factorization/"/>
     <url>/post/matrix-lu-factorization/</url>

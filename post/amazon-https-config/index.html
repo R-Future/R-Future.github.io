@@ -17,9 +17,25 @@
   <meta name="description" content="">
   <meta name="author" content="Future">
   <meta name="keywords" content="">
-  <title>归档 - Future</title>
+  <title>AMAZON HTTPS设定 - Future</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -47,7 +63,7 @@
 
 
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header style="height: 60vh;">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -141,14 +157,56 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/images/https.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="AMAZON HTTPS设定">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Future
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-14 21:59" pubdate>
+        2022年7月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      228 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -161,46 +219,150 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 30 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2018</p>
-    
-    <a href="/post/what-I-think-about-ui-design/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">对UI设计的一些感悟</span>
-      <time style="float: right;">09-02</time>
-    </a>
-  
-    
-    <a href="/post/why-I-build-a-personal-blog/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">我为什么要搭建个人博客</span>
-      <time style="float: right;">08-18</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AMAZON HTTPS设定</h1>
+            
+            <div class="markdown-body">
+              <p>网络安全一直是一个备受关注的问题。如今，站点部署基本都要考虑使用http协议的安全版本https。市面上已经有很多免费的证书生成工具，比如<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Let%27s_Encrypt">letsencrypt</a>，配合nginx可以很容易完成部署。当然，类似亚马逊这样的云服务商也都提供了相关功能以方面用户使用。<br><img src="/images/amazon-https-config/config-process.png" srcset="/img/loading.gif" alt="图1.1, amazon ec2 https配置流程"></p>
+<h2 id="Load-balancer"><a href="#Load-balancer" class="headerlink" title="Load balancer"></a>Load balancer</h2><p>添加load balancer的时候，选择application即可。classic版本貌似没法将http重定向到https。图1.2为监听器配置，dbook-lb-tg为target group。<br><img src="/images/amazon-https-config/load-balancer.png" srcset="/img/loading.gif" alt="图1.2, load balancer监听器"></p>
+<h2 id="Route53"><a href="#Route53" class="headerlink" title="Route53"></a>Route53</h2><p>创建route53后即可得到域名解析服务器（如图1.3），将其配置到域名购买方即可。<br><img src="/images/amazon-https-config/route53.png" srcset="/img/loading.gif" alt="图1.3, route 53 DNS"></p>
+<h2 id="Notice"><a href="#Notice" class="headerlink" title="Notice"></a>Notice</h2><p>申请证书的时候有个坑，子域名*.example.com的证书是不包含根域名example.com的，所以需要另外对根域名申请一个证书。<br><img src="/images/amazon-https-config/cert-apply-note.png" srcset="/img/loading.gif" alt="图1.4, 区别域名的证书申请"></p>
+<p>References:<br>[1] <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/acm/latest/userguide/acm-certificate.html">https://docs.aws.amazon.com/zh_cn/acm/latest/userguide/acm-certificate.html</a></p>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/amazon/">amazon</a>
+                    
+                      <a class="hover-with-bg" href="/tags/https/">https</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/matrix-lu-factorization/">
+                        <span class="hidden-mobile">矩阵分解 -- LU</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            <!-- donate block -->
+            
+              <article class="donate" id="donate">
+                <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+           ↑<br>
+           感谢您的支持!
+        </span>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <img src="/images/alipay.jpeg" srcset="/img/loading.gif" alt="alipay" title="alipay"/>
+        <img src="/images/wechatpay.jpeg" srcset="/img/loading.gif" alt="wechatpay" title="wechatpay"/>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+              </article>
+            
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "9b8K9ofmNljG1rmHUS3Nsc1E-9Nh9j0Va",
+          app_key: "pS65qQ5uAyxVsXbs5tDSH2GR",
+          placeholder: "欢迎批评指正",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -307,9 +469,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
@@ -362,7 +530,24 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
