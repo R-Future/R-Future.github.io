@@ -180,14 +180,14 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/post/big-number-multiply/" target="_self">
-          <img src="/images/numbers.jpg" srcset="/img/loading.gif" alt="大数乘法">
+          <img src="/images/numbers.jpg" srcset="/img/loading.gif" alt="大数运算 -- 乘法">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/post/big-number-multiply/">大数乘法</a>
+        <a href="/post/big-number-multiply/">大数运算 -- 乘法</a>
       </h1>
 
       <p class="index-excerpt">
@@ -197,8 +197,26 @@
             
           
           异想时刻在做数字运算的时候，常常会遇到结果溢出的情形，也就是超出了整型所能表达的最大数字。此时便不能通过整型去表达数字了，需要以字符串的形式来存储和计算数字。以下记录下几种大数乘法的运算方法以便后续应用。
-普通算法采用按位相乘错位相加的方式计算结果。以56*34为例。
-123456789     5  6  x  3  4---------    20 24   //按位相乘 15 18-----
+普通算法采用按位相乘错位相加的方式计算结果。若针对两个n位数的整数，其时间复杂度为
+O(n_2)
+
+
+
+
+
+
+
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+。以56*34为例。
+123456789     5 
         </a>
       </p>
 
