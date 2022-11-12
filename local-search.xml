@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>迁移docker生产环境</title>
+    <link href="/post/migration-with-docker/"/>
+    <url>/post/migration-with-docker/</url>
+    
+    <content type="html"><![CDATA[<h1 id="镜像迁移"><a href="#镜像迁移" class="headerlink" title="镜像迁移"></a>镜像迁移</h1><p>1，本地创建好image, 将image打包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker save -o images.tar image1:1.0.0 image2:1.2.0 ...<br></code></pre></td></tr></table></figure><p>2，将打包好的压缩文件上传到服务器，并在服务器端load<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker load &lt; images.tar<br></code></pre></td></tr></table></figure><br>3，将docker-compose.yml和.env文件上传到服务器，并启动服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose up<br></code></pre></td></tr></table></figure><br>注意：yml文件中引用的image版本号要和打包的image版本号一致。</p><h1 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h1><p>由于docker volumes的访问权限级别很高，以至于普通的数据拷贝不允许，所以这里我们需要借助一个临时docker image(busybox)，先将volume映射到临时image中，然后再将image中volumes打包拷贝到其他目录下，并将此目录映射到宿主机上我们可以访问的文件夹下。</p><p>1，将宿主机上的volumes打包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -v ~/backup:/backup</span><br><span class="hljs-comment"># ~/backup -&gt; 宿主机上的目录用来存放压缩后的volume</span><br><span class="hljs-comment"># /backup -&gt; image中存放volumes.tgz的目录</span><br><br><span class="hljs-comment"># -v /var/lib/docker:/docker</span><br><span class="hljs-comment"># /var/lib/docker -&gt; 宿主机上实际存放volumes文件的目录</span><br><span class="hljs-comment"># /docker -&gt; image中存放volumes文件的目录</span><br><br>docker run --rm -it -v ~/backup:/backup -v /var/lib/docker:/docker busybox tar cfz /backup/volumes.tgz /docker/volumes<br></code></pre></td></tr></table></figure><p>2， 迁移压缩包到新的服务器，解压压缩包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkdir ~/backup<br>mv volumes.tgz ~/backup<br><span class="hljs-built_in">cd</span> ~/backup<br>sudo tar -zxf volumes.tgz<br></code></pre></td></tr></table></figure><p>3，同样借助临时image将volume拷贝到宿主机上</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -v ~/backup/docker/volumes:/volumes</span><br><span class="hljs-comment"># ~/backup/docker/volumes -&gt; 宿主机上解压的volumes文件</span><br><span class="hljs-comment"># /backup -&gt; image中存放volumes的目录</span><br><br><span class="hljs-comment"># -v /var/lib/docker:/docker</span><br><span class="hljs-comment"># /var/lib/docker -&gt; 宿主机上要存放image的目录</span><br><span class="hljs-comment"># /docker -&gt; image中volumes的拷贝目录</span><br><br>docker run --rm -it -v ~/backup/docker/volumes:/backup -v /var/lib/docker:/docker busybox cp -rp /backup/* /docker/volumes/<br></code></pre></td></tr></table></figure><p>4，根据volume名称挂载volume</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker volume create <span class="hljs-comment">#volume-name#</span><br></code></pre></td></tr></table></figure><p>References：<br>[1]<a href="https://www.hangge.com/blog/cache/detail_2411.html">https://www.hangge.com/blog/cache/detail_2411.html</a><br>[2]<a href="https://sealhuang.github.io/migrate-docker-volume-from-one-host-to-another">https://sealhuang.github.io/migrate-docker-volume-from-one-host-to-another</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>docker, migration</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>字符串查找</title>
     <link href="/post/string-search/"/>
     <url>/post/string-search/</url>
